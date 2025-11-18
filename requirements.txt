@@ -2,9 +2,9 @@
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 
-# PaddleOCR và dependencies
-paddleocr==2.7.3
-paddlepaddle==2.5.2
+# PaddleOCR và dependencies - UPDATED VERSIONS
+paddleocr==2.8.1
+paddlepaddle==3.0.0
 
 # Image processing
 Pillow==10.1.0
