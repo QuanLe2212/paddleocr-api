@@ -21,3 +21,4 @@ EXPOSE 8000
 
 # Run with Python to use PORT environment variable
 CMD ["python", "main.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "$PORT"]
