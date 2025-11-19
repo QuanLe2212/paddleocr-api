@@ -15,7 +15,7 @@ def get_ocr():
     global _ocr
     if _ocr is None:
         from paddleocr import PaddleOCR
-        _ocr = PaddleOCR(use_angle_cls=True, lang='vi', use_gpu=False)
+        _ocr = PaddleOCR(use_angle_cls=True, lang='vi')
     return _ocr
 
 @app.post("/ocr")
