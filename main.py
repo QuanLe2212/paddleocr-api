@@ -1,20 +1,30 @@
 from fastapi import FastAPI, File, UploadFile
-from paddleocr import PaddleOCR
-import numpy as np
 from PIL import Image
+import numpy as np
 import io
 import os
 import uvicorn
 
 app = FastAPI()
 
-# Initialize PaddleOCR
-ocr = PaddleOCR(use_angle_cls=True, lang='vi')
+# Global variable for lazy loading
+_ocr = None
+
+def get_ocr():
+    """Lazy load OCR model"""
+    global _ocr
+    if _ocr is None:
+        from paddleocr import PaddleOCR
+        _ocr = PaddleOCR(use_angle_cls=True, lang='vi', use_gpu=False)
+    return _ocr
 
 @app.post("/ocr")
 async def process_ocr(file: UploadFile = File(...)):
     """Process image and return OCR results"""
     try:
+        # Lazy load OCR
+        ocr = get_ocr()
+        
         # Read image
         contents = await file.read()
         image = Image.open(io.BytesIO(contents))
@@ -49,7 +59,6 @@ async def root():
 async def health():
     return {"status": "healthy"}
 
-# Run server - Railway will provide PORT
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
