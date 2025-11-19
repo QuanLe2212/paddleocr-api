@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import io
 import os
+import uvicorn
 
 app = FastAPI()
 
@@ -48,8 +49,7 @@ async def root():
 async def health():
     return {"status": "healthy"}
 
-# For Railway.app
+# Run server - Railway will provide PORT
 if __name__ == "__main__":
-    import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
