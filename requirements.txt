@@ -1,6 +1,8 @@
 fastapi
 uvicorn[standard]
+paddlepaddle
 paddleocr
 pillow
 numpy
 python-multipart
+opencv-python-headless
