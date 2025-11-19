@@ -1,10 +1,10 @@
-# Use Python 3.12 slim based on Debian Bookworm (stable) để tránh lỗi package
+# Use Python 3.12 slim based on Debian Bookworm (stable)
 FROM python:3.12-slim-bookworm
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies (FIX libGL error - dùng libgl1 thay vì libgl1-mesa-glx)
+# Install system dependencies (FIX libGL error)
 RUN apt-get update && apt-get install -y \
     libgl1 \
     libglib2.0-0 \
@@ -19,8 +19,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY main.py .
 
-# Expose port (Railway sẽ set PORT env variable)
+# Expose port (Railway will set PORT env variable)
 EXPOSE 8000
 
-# Run qua python main.py để handle PORT động (từ code của bạn)
+# Run the application via python main.py (handles PORT dynamically)
 CMD ["python", "main.py"]
