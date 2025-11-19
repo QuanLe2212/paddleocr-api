@@ -1,8 +1,12 @@
+# Build tools (REQUIRED)
+setuptools>=65.0.0
+wheel>=0.38.0
+
 # FastAPI Framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 
-# PaddleOCR và dependencies - UPDATED VERSIONS
+# PaddleOCR và dependencies
 paddleocr==2.8.1
 paddlepaddle==3.0.0
 
